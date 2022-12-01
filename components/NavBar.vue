@@ -1,27 +1,57 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
+  <nav
+    class="navbar fixed-top navbar-expand-lg bg-white shadow justify-content-between"
+  >
+    <div class="container-fluid justify-content-start">
+      <!-- Toggler button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Logo -->
       <a class="navbar-brand" href="#">
-        <img src="@/public/images/logo/logo-toyota.png" alt="TOYOTA logo" />
+        <img
+          src="@/images/logo/logo-toyota.png"
+          alt="TOYOTA logo"
+          width="150"
+        />
       </a>
 
-      <div id="navbarSupportedContent" class="collapse navbar-collapse">
+      <!-- nav-item -->
+      <div id="navbarTogglerDemo01" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li v-for="item in navBarItems" :key="item.title" class="nav-item">
+          <li
+            v-for="item in navBarItems"
+            :key="item.title"
+            class="nav-item h-100 px-2 py-1"
+          >
             <a class="nav-link" aria-current="page" :href="item.link">
               {{ item.title }}
             </a>
           </li>
         </ul>
       </div>
+
+      <!-- end of nav-item -->
       <ul class="nav justify-content-end">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            <Icon name="material-symbols:search" size="1.5rem" />
+          <a class="nav-link" href="#">
+            <Icon name="material-symbols:search" size="1.5em" />
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">追蹤清單</a>
+          <a class="nav-link hr-line" href="#">
+            <Icon name="mdi:heart" size="1.5em" />
+            追蹤清單
+          </a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -31,7 +61,7 @@
             role="button"
             aria-expanded="false"
           >
-            <Icon name="material-symbols:person" size="1.5rem" />
+            <Icon name="material-symbols:person" size="1.5em" />
             HI ，您好！
           </a>
           <ul class="dropdown-menu justify-content-center">
@@ -133,7 +163,15 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-img[alt='TOYOTA logo'] {
-  width: 150px;
+.nav-link {
+  color: #525252;
+  &:hover {
+    color: #ba222e;
+  }
+}
+
+.hr-line {
+  border-left: solid gray 1px;
+  border-right: solid gray 1px;
 }
 </style>

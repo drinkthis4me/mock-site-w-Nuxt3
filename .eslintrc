@@ -28,7 +28,7 @@
       { "avoidEscape": true, "allowTemplateLiterals": true }
     ],
     "prettier/prettier": [
-      "error",
+      "warn",
       {
         "singleQuote": true
       }
