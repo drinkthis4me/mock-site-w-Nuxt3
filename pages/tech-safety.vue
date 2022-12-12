@@ -75,18 +75,32 @@
         >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="~/assets/img/tech-safty/measure-car.png"
-                class="d-block w-100"
-                alt="..."
-              />
+              <h3 class="text-center">測試、測試、再測試</h3>
+              <p class="text-center">我們分析各種意外事故的資料並執行廣泛的碰撞測試，以持續導入可降低意外事故中傷害的安全措施。</p>
+              <div class="image-animation">
+                <img src="~/assets/img/tech-safty/measure-ground.png" alt="measure-ground" class="ground">
+                <img src="~/assets/img/tech-safty/measure-wall.gif" alt="measure-wall" class="wall">
+                <img src="~/assets/img/tech-safty/measure-car.png" alt="measure-car" class="car">
+                <img src="~/assets/img/tech-safty/measure-spark.png" alt="measure-spark" class="spark">
+              </div>
+        
             </div>
             <div class="carousel-item">
-              <img
-                src="~/assets/img/tech-safty/measure-cabin-room.png"
-                class="d-block w-100"
-                alt="..."
-              />
+              <div class="container">
+                <div class="row justify-content-center">
+                  <dv class="col-lg-6 order-2">
+                    <h3 class="text-center">打造未來安全科技</h3>
+                    <p>我們建造了一個全世界最先進的駕駛模擬機，它是可移動的圓頂型體，且配備有360度高畫質螢幕，可在此模擬左右轉彎、加速及減速，模擬以實際車輛重現時太過危險之情況、或特殊情況下之駕駛條件。</p>
+                    <p>我們以此研究事故時之駕駛反映及車輛資料，並不斷地進化我們的主動安全科技。</p>
+                  </dv>
+                  <div class="col-lg-6 order-1">
+                    <div class="image-animation-cabin">
+                      <img src="~/assets/img/tech-safty/measure-cabin-room.png" alt="measure-cabin-room" class="room">
+                      <img src="~/assets/img/tech-safty/measure-cabin-base.png" alt="measure-cabin-base" class="base">
+                    </div>
+                  </div>
+                </div>                
+              </div>              
             </div>
             <div class="carousel-item">
               <img
@@ -170,4 +184,51 @@ header.page-header {
 .page-section {
   background-color: #f0f0f4;
 }
+
+.image-animation{
+  img{
+    .ground{
+      height:36px;
+      bottom: 50px;
+      width: 948px;
+    }
+    .wall{
+      left:90px;
+      width: 32px;
+      bottom: 86px;
+    }
+    .car{
+      left: 440px;
+      width:460px;
+      bottom: 72px;
+    }
+    .spark{
+      left: 94px;
+      width: 86px;
+      bottom: 106px;
+      opacity: 0;      
+    }
+  }
+}
+
+// .image-animation-cabin{
+//   img{
+//     max-width: 100%;
+//     .room{
+//       animation: cabin-room 3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s infinite alternate;
+//       top: 35px;
+//       width: 330px;
+//       margin-left: -65px;
+//       left: 50%;
+//       transform: rotate(5deg);
+//       transform-origin: 50% 95%;
+//     }
+//     .base{
+//       width: 322px;
+//       margin-left: -161px;
+//       left: 50%;
+//       bottom : 0;
+//     }
+//   }
+// }
 </style>
