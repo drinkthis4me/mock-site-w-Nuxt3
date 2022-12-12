@@ -105,7 +105,7 @@
             <div class="carousel-item">
               <div class="container">
                 <div class="row justify-content-center">
-                  <dv class="col-lg-6 order-2">
+                  <div class="col-lg-6 order-2">
                     <h3 class="text-center">打造未來安全科技</h3>
                     <p>
                       我們建造了一個全世界最先進的駕駛模擬機，它是可移動的圓頂型體，且配備有360度高畫質螢幕，可在此模擬左右轉彎、加速及減速，模擬以實際車輛重現時太過危險之情況、或特殊情況下之駕駛條件。
@@ -113,7 +113,7 @@
                     <p>
                       我們以此研究事故時之駕駛反映及車輛資料，並不斷地進化我們的主動安全科技。
                     </p>
-                  </dv>
+                  </div>
                   <div class="col-lg-6 order-1">
                     <div class="image-animation-cabin">
                       <img
