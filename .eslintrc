@@ -30,7 +30,8 @@
     "prettier/prettier": [
       "warn",
       {
-        "singleQuote": true
+        "singleQuote": true,
+        "endOfLine": "auto"
       }
     ],
     "@typescript-eslint/no-var-requires": "off",
