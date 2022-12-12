@@ -29,7 +29,7 @@
       <div id="navbarTogglerDemo01" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li
-            v-for="item in navBarItems"
+            v-for="item in navBarItems.slice(0, 5)"
             :key="item.title"
             class="nav-item h-100 px-2 py-1"
           >
@@ -61,7 +61,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link hr-line" href="#">
+          <a
+            class="nav-link hr-line"
+            href="#"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#tracking"
+            aria-controls="tracking"
+          >
             <Icon name="mdi:heart" size="1.5em" />
             追蹤清單
           </a>
@@ -78,14 +84,13 @@
             HI ，您好！
           </a>
           <ul class="dropdown-menu justify-content-center">
-            <li>
-              <a
-                v-for="item in loginItems"
-                :key="item.title"
-                class="dropdown-item"
-                href="/"
-                >{{ item.title }}
-              </a>
+            <li
+              v-for="item in navBarItems.find(
+                (t) => t.data_bs_target === 'login'
+              )?.child"
+              :key="item.title"
+            >
+              <a class="dropdown-item" href="/">{{ item.title }} </a>
             </li>
           </ul>
         </li>
@@ -126,7 +131,7 @@
               <a
                 v-for="childItem in item.child"
                 :key="childItem.title"
-                href="#"
+                :href="childItem.link"
                 class="list-group-item list-group-item-action"
               >
                 {{ childItem.title }}
@@ -172,31 +177,31 @@ export default defineComponent({
           },
           {
             title: '一車一樹',
-            link: '/news',
+            link: '/',
           },
           {
             title: 'TNGA新世代造車工藝',
-            link: '/news',
+            link: '/',
           },
           {
             title: '極致安全防護',
-            link: '/news',
+            link: '/tech-safety',
           },
           {
             title: '新能源動力',
-            link: '/news',
+            link: '/',
           },
           {
             title: 'Start Your Impossible',
-            link: '/news',
+            link: '/',
           },
           {
             title: 'Gazoo Racing',
-            link: '/news',
+            link: '/',
           },
           {
             title: 'TOYOTA精品',
-            link: '/news',
+            link: '/',
           },
         ],
       },
@@ -286,50 +291,65 @@ export default defineComponent({
           },
         ],
       },
-    ];
-
-    const loginItems = [
       {
-        title: '會員註冊/登入',
-        link: '',
+        title: '搜尋',
+        data_bs_target: 'searchBox',
+        link: '/',
+        child: [],
       },
       {
-        title: '和泰集團會員中心',
-        link: '',
+        title: '追蹤清單',
+        data_bs_target: 'tracking',
+        link: '/',
+        child: [],
       },
       {
-        title: '愛車秘書',
-        link: '',
-      },
-      {
-        title: '車主新訊',
-        link: '',
-      },
-      {
-        title: '會員預約保養',
-        link: '',
-      },
-      {
-        title: '維修據點查詢',
-        link: '',
-      },
-      {
-        title: '車籍履歷查詢',
-        link: '',
-      },
-      {
-        title: '和泰Points',
-        link: '',
-      },
-      {
-        title: '購車和泰Pay支付',
-        link: '',
+        title: 'member login',
+        data_bs_target: 'login',
+        link: '/',
+        child: [
+          {
+            title: '會員註冊/登入',
+            link: '',
+          },
+          {
+            title: '和泰集團會員中心',
+            link: '',
+          },
+          {
+            title: '愛車秘書',
+            link: '',
+          },
+          {
+            title: '車主新訊',
+            link: '',
+          },
+          {
+            title: '會員預約保養',
+            link: '',
+          },
+          {
+            title: '維修據點查詢',
+            link: '',
+          },
+          {
+            title: '車籍履歷查詢',
+            link: '',
+          },
+          {
+            title: '和泰Points',
+            link: '',
+          },
+          {
+            title: '購車和泰Pay支付',
+            link: '',
+          },
+        ],
       },
     ];
 
     return {
       navBarItems,
-      loginItems,
     };
   },
 });
