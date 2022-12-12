@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar />
     <div class="container">
       <div class="dropdown">
         <button
@@ -29,7 +28,6 @@
         <button @click="store.increment">count++</button>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 

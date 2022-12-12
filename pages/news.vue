@@ -1,5 +1,3 @@
-<script lang="ts"></script>
-
 <template>
   <div>
     <div class="container-fluid top-margin">
@@ -30,20 +28,64 @@
 
     <div class="container-lg">
       <div class="row">
-        <div v-for="n in 10" :key="n" class="card col-12 col-sm-6 col-lg-4">
+        <div
+          v-for="item in myList"
+          :key="item.id"
+          class="card col-12 col-sm-6 col-lg-4"
+        >
           <img
-            src="~/assets/img/NEWS_prize.jpg"
+            :src="item.thumbnailUrl"
             class="card-img-top"
-            alt="Box with bowtie"
+            alt="jsonplaceholder stock photo"
           />
           <div class="card-body">
-            <p class="card-text">Some quick example text</p>
+            <p class="card-text">{{ item.id }}. {{ item.title }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useFetch } from '#app';
+
+export default defineComponent({
+  name: 'News',
+  setup() {
+    const url = 'https://jsonplaceholder.typicode.com/photos';
+
+    interface photo {
+      albumId: number;
+      id: number;
+      title: string;
+      url: string;
+      thumbnailUrl: string;
+    }
+
+    const myList = ref<photo[]>();
+
+    const { data } = useFetch(url, {
+      server: false,
+      onResponse({ request, response }) {
+        myList.value = response._data.slice(0, 10);
+        console.log('[fetch response]', request, response);
+      },
+      onRequestError({ request, response }) {
+        console.log('[request error]', request, response);
+      },
+      onResponseError({ request, response }) {
+        console.log('[response error]', request, response);
+      },
+    });
+
+    return {
+      myList,
+      data,
+    };
+  },
+});
+</script>
 
 <style scoped lang="scss">
 .top-margin {
