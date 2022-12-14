@@ -6,30 +6,36 @@
       </header>
     </div>
 
+    <!-- filter actions -->
     <div class="container my-5">
       <ul class="list-inline text-center">
         <li class="list-inline-item">
-          <a class="type-text">全部</a>
+          <a class="type-text" @click="changeFilter('all')">全部</a>
         </li>
         <li class="list-inline-item">
-          <a class="type-text">品牌活動</a>
+          <a class="type-text" @click="changeFilter('oddID')"> 品牌活動 </a>
         </li>
         <li class="list-inline-item">
-          <a class="type-text">品牌新聞</a>
+          <a class="type-text" @click="changeFilter('evenID')"> 品牌新聞 </a>
         </li>
         <li class="list-inline-item">
-          <a class="type-text">優惠活動</a>
+          <a class="type-text" @click="changeFilter('lessThanFive')">
+            優惠活動
+          </a>
         </li>
         <li class="list-inline-item">
-          <a class="type-text">中獎名單</a>
+          <a class="type-text" @click="changeFilter('greaterThanFive')">
+            中獎名單
+          </a>
         </li>
       </ul>
     </div>
 
     <div class="container-lg">
-      <div class="row">
+      <!-- News in cards -->
+      <div v-if="store.shortNewsList.length > 0" class="row">
         <div
-          v-for="item in store.shortNewsList"
+          v-for="item in listToRender"
           :key="item.id"
           class="card col-12 col-sm-6 col-lg-4"
         >
@@ -43,11 +49,34 @@
           </div>
         </div>
       </div>
+      <!-- Placeholder for cards -->
+      <div v-else class="row">
+        <div
+          v-for="n in 6"
+          :key="n"
+          class="card col-12 col-sm-6 col-lg-4"
+          aria-hidden="true"
+        >
+          <img src="..." class="card-img-top" alt="Loading" />
+          <div class="card-body">
+            <h5 class="card-title placeholder-glow">
+              <span class="placeholder col-6"></span>
+            </h5>
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+              <span class="placeholder col-8"></span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted, computed, ref } from 'vue';
 import { useFetchNewsStore } from '~~/stores/fetchNews';
 
 export default defineComponent({
@@ -57,8 +86,59 @@ export default defineComponent({
 
     onMounted(() => store.fetchNews());
 
+    interface photo {
+      albumId: number;
+      id: number;
+      title: string;
+      url: string;
+      thumbnailUrl: string;
+    }
+
+    // Possible filter can be used
+    const filters = [
+      {
+        condition: 'all',
+        fn: (i: photo) => i === i,
+      },
+      {
+        condition: 'oddID',
+        fn: (i: photo) => i.id % 2 !== 0,
+      },
+      {
+        condition: 'evenID',
+        fn: (i: photo) => i.id % 2 === 0,
+      },
+      {
+        condition: 'lessThanFive',
+        fn: (i: photo) => i.id <= 5,
+      },
+      {
+        condition: 'greaterThanFive',
+        fn: (i: photo) => i.id >= 5,
+      },
+    ];
+
+    // ref to target filter
+    const targetFilter = ref(filters.find((t) => t.condition === 'all'));
+
+    // actual list to render after filtered
+    const listToRender = computed(() => {
+      if (targetFilter.value)
+        return store.shortNewsList.filter(targetFilter.value.fn);
+      else return store.shortNewsList;
+    });
+
+    // link action for changing filter
+    function changeFilter(target: string) {
+      const inputFilter = filters.find((t) => t.condition === target);
+      if (inputFilter) targetFilter.value = inputFilter;
+      else console.error(`${target} doesn't exist on filters`);
+    }
+
     return {
       store,
+      listToRender,
+      changeFilter,
     };
   },
 });
