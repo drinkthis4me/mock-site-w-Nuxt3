@@ -9,7 +9,7 @@ export const useFetchNewsStore = defineStore('news', {
   },
   actions: {
     async fetchNews() {
-      const url = 'https://jsonplaceholder.typicode.com/photos111';
+      const url = 'https://jsonplaceholder.typicode.com/photos';
 
       const data = await $fetch<photo[]>(url, { method: 'GET' }).catch(
         (error) => console.log(error.data)
