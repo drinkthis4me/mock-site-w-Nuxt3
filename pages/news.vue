@@ -37,13 +37,14 @@
         <div
           v-for="item in listToRender"
           :key="item.id"
-          class="card col-12 col-sm-6 col-lg-4"
+          class="card border-danger col-12 col-sm-6 col-lg-4 position-relative"
         >
           <img
             :src="item.thumbnailUrl"
             class="card-img-top"
             alt="jsonplaceholder stock photo"
           />
+          <a :href="item.url" class="stretched-link"></a>
           <div class="card-body">
             <p class="card-text">{{ item.id }}. {{ item.title }}</p>
           </div>
@@ -167,5 +168,14 @@ a.type-text {
 .list-inline-item {
   margin-left: 15px;
   padding: 0 10px;
+}
+
+.card {
+  --bs-border-opacity: 0;
+  &:hover {
+    --bs-border-opacity: 1;
+    box-shadow: 0 0.5rem 1rem rgba(black, 0.15);
+    color: #ba222e;
+  }
 }
 </style>
