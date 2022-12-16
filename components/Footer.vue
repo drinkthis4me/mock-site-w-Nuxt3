@@ -106,7 +106,7 @@
           <div class="col-6">
             <div class="justify-content-center">
               <div class="col-12 col-lg text-end copyright">
-                <img src="@/images/logo/toyota-white.png" alt="TOYOTA white" />
+                <img src="/img/logo/toyota-white.png" alt="TOYOTA white" />
                 © HOTAI MOTOR CO., LTD. 和泰汽車股份有限公司
               </div>
               <div class="col-12 col-lg text-end copyright-suggestion">

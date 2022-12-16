@@ -17,12 +17,8 @@
       </button>
 
       <!-- Logo -->
-      <a class="navbar-brand" href="#">
-        <img
-          src="@/images/logo/logo-toyota.png"
-          alt="TOYOTA logo"
-          width="150"
-        />
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo/logo-toyota.png" alt="TOYOTA logo" width="150" />
       </a>
 
       <!-- nav-item -->
