@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",
+    "@types/bootstrap": "^5.2.6",
+    "bootstrap": "^5.2.3",
     "pinia": "^2.0.27"
   }
 }
