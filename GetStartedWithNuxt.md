@@ -8,8 +8,10 @@ Table of Content
   - [2. Config nuxt.config.js for Pinia](#2-config-nuxtconfigjs-for-pinia)
   - [3. Create and register as a plugin](#3-create-and-register-as-a-plugin)
 - [Install Bootstrap](#install-bootstrap)
-  - [1. Find the link to the latest version](#1-find-the-link-to-the-latest-version)
-  - [2. In your nuxt.config.ts:](#2-in-your-nuxtconfigts)
+  - [1. Install Bootstrap  with the npm package](#1-install-bootstrap--with-the-npm-package)
+  - [2. Find the CDN link to the latest version](#2-find-the-cdn-link-to-the-latest-version)
+  - [3. In your nuxt.config.ts:](#3-in-your-nuxtconfigts)
+  - [4. Bootstrap plugin](#4-bootstrap-plugin)
 - [ESLint + Prettier (/w Typescript supported)](#eslint--prettier-w-typescript-supported)
   - [1. Install core and plugin with package manager:](#1-install-core-and-plugin-with-package-manager)
   - [2. Config ESLint](#2-config-eslint)
@@ -83,9 +85,15 @@ And you are done!
 
 # Install Bootstrap
 
-Install bootstrap by CDN
+Install bootstrap by CDN and npm
 
-## 1. Find the [link to the latest version](https://getbootstrap.com/docs/5.2/getting-started/download/#cdn-via-jsdelivr)
+## 1. Install Bootstrap  with the npm package
+
+```bash
+npm install bootstrap@5.2.3
+```
+
+## 2. Find the [CDN link](https://getbootstrap.com/docs/5.2/getting-started/download/#cdn-via-jsdelivr) to the latest version
   
 Copy first two links contains bootstrap.bundle
 
@@ -94,9 +102,9 @@ Copy first two links contains bootstrap.bundle
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" ...
 ```
 
-## 2. In your [nuxt.config.ts](https://nuxt.com/docs/api/configuration/nuxt-config):
+## 3. In your [nuxt.config.ts](https://nuxt.com/docs/api/configuration/nuxt-config):
 
-Inside app head, setup script and link for CDN link
+Inside app head, set up script and CSS for CDN link
 
 ```js
 export default defineNuxtConfig({
@@ -112,19 +120,71 @@ export default defineNuxtConfig({
             'sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4',
           crossorigin: 'anonymous',
         },
-      ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css',
-          integrity:
-            'sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65',
-          crossorigin: 'anonymous',
-        },
-      ],
+      ],      
     },
   },
+  css: ['assets/styles/main.scss']
 });
+```
+
+Import bootstrap and [customize](https://getbootstrap.com/docs/5.2/customize/sass/) your main.scss 
+```js
+// assets/styles/main.scss
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+```
+
+
+## 4. Bootstrap plugin
+
+In oder to access component by JavaScript, make a bootstrap.client.ts plugin.
+
+```js
+// plugins/bootstrap.client.ts
+
+import * as bootstrap from 'bootstrap'
+
+export default defineNuxtPlugin(() => {
+    return {
+      provide: {
+        bootstrap: bootstrap
+      }
+    }
+})
+```
+
+Install type definitions for bootstrap: [@types/bootstrap](https://www.npmjs.com/package/@types/bootstrap)
+
+```bash
+npm install --save @types/bootstrap
+```
+
+Then in your page
+
+```js
+// pages/index.vue
+
+<script setup lang="ts">
+import type { Modal } from "bootstrap";
+const { $bootstrap } = useNuxtApp();  
+
+let myModal: Modal
+onMounted(()=>{
+  myModal = new $bootstrap.Modal('#exampleModal')
+})
+
+// access modal's options
+const myModal = new bootstrap.Modal('#myModal', {
+  keyboard: false, backdrop: false
+})
+
+// access modal's methods
+myModal.toggle();
+
+// access modal's events
+myModal.addEventListener('hidden.bs.modal', e =>{})
+
+</script>
 ```
 
 And you are done!
